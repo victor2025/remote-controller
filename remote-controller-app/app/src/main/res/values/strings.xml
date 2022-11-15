@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Remote Controler</string>
+    <string name="app_name">Remote Controller</string>
     <!-- Settings Activity Title -->
     <string name="title_activity">Remote Controller</string>
 

@@ -11,4 +11,8 @@
     <color name="status_disconnected">#B00020</color>
     <color name="status_connecting">#FF9800</color>
     <color name="status_connected">#4CAF50</color>
+
+    <color name="title_background">#009688</color>
+    <color name="form_background">#85009688</color>
+    <color name="control_btn_background">@color/teal_700</color>
 </resources>

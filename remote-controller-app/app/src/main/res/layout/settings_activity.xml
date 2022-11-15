@@ -1,39 +1,305 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/teal_700">
+    android:layout_weight="3"
+    android:background="@color/teal_700"
+    android:orientation="vertical">
+    <!--  connect bar  -->
     <TextView
         android:id="@+id/connect_bar"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/status_disconnected"
+        android:clickable="true"
+        android:gravity="center"
         android:text="@string/default_status"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:clickable="true"/>
-    <!--  ontrol zone  -->
+        android:textStyle="bold" />
+    <!--  info zone  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/info_window_margin"
+            android:layout_marginTop="@dimen/info_window_margin"
+            android:layout_marginRight="@dimen/info_window_margin"
+            android:layout_marginBottom="@dimen/info_window_margin"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <!-- info title-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/title_background"
+                android:text="Device Infomation"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <!-- info form -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/form_background"
+                android:orientation="horizontal">
+                <!-- subjects -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent">
+
+                            <View
+                                android:layout_width="@dimen/info_dot_size"
+                                android:layout_height="@dimen/info_dot_size"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:background="@color/black" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="name:"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent">
+
+                            <View
+                                android:layout_width="@dimen/info_dot_size"
+                                android:layout_height="@dimen/info_dot_size"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:background="@color/black" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="address:"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent">
+
+                            <View
+                                android:layout_width="@dimen/info_dot_size"
+                                android:layout_height="@dimen/info_dot_size"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:background="@color/black" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="status:"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- contents -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/info_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="none" />
+
+                    <TextView
+                        android:id="@+id/info_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="none" />
+
+                    <TextView
+                        android:id="@+id/info_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="disconnected"
+                        android:textColor="@color/status_disconnected"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!--  control zone  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_marginLeft="@dimen/info_window_margin"
+            android:layout_marginTop="@dimen/info_window_margin"
+            android:layout_marginRight="@dimen/info_window_margin"
+            android:layout_marginBottom="30dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <!-- title-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/title_background"
+                android:text="Control Panel"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <!-- info form -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/form_background"
+                android:orientation="vertical">
+                <!-- line one -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <!-- btn power -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
+                        <RelativeLayout
+                            android:id="@+id/btn_power"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/btn_margin_border"
+                            android:layout_marginTop="@dimen/btn_margin_border"
+                            android:layout_marginRight="@dimen/btn_margin_each"
+                            android:layout_marginBottom="@dimen/btn_margin_each"
+                            android:background="@color/control_btn_background"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/btn_up_down_size"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/btn_power" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+                    <!-- btn up -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <RelativeLayout
+                            android:id="@+id/btn_up"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/btn_margin_each"
+                            android:layout_marginTop="@dimen/btn_margin_border"
+                            android:layout_marginRight="@dimen/btn_margin_border"
+                            android:layout_marginBottom="@dimen/btn_margin_each"
+                            android:layout_weight="1"
+                            android:background="@color/control_btn_background"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/btn_up_down_size"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/btn_up" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+                <!-- line two -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <!-- btn mode-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <RelativeLayout
+                            android:id="@+id/btn_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/btn_margin_border"
+                            android:layout_marginTop="@dimen/btn_margin_each"
+                            android:layout_marginRight="@dimen/btn_margin_each"
+                            android:layout_marginBottom="@dimen/btn_margin_border"
+                            android:background="@color/control_btn_background"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/btn_mode_width"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/btn_mode" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+                    <!-- btn down -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <RelativeLayout
+                            android:id="@+id/btn_down"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/btn_margin_each"
+                            android:layout_marginTop="@dimen/btn_margin_each"
+                            android:layout_marginRight="@dimen/btn_margin_border"
+                            android:layout_marginBottom="@dimen/btn_margin_border"
+                            android:layout_weight="1"
+                            android:background="@color/control_btn_background"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/btn_up_down_size"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/btn_down" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

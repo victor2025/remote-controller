@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_status">Device not connected, tap to scan!</string>
+    <string name="default_status">Device is disconnected, tap to scan!</string>
     <string name="connecting_status">Scanning...</string>
-    <string name="connected_status">Connected to: </string>
+    <string name="connected_status">Connected to: %s, tap to disconnect.</string>
 </resources>

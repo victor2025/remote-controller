@@ -1,10 +1,10 @@
-package com.victor2022.remote_controller.handlers;
+package com.victor2022.remote_controller.utils;
 
 import android.content.Context;
 
 import com.victor2022.remote_controller.utils.PreferenceUtils;
 
-public class ConnectInfoHandler {
+public class ConnectInfoUtils {
 
     private static final String INFO_SIGN = "info_sign";
     private static final String INFO_IP = "info_ip";
@@ -23,7 +23,7 @@ public class ConnectInfoHandler {
     }
 
     public static String getIp(Context context) {
-        return PreferenceUtils.getString(context, INFO_IP, null);
+        return PreferenceUtils.getString(context, INFO_IP, "none");
     }
 
     public static void putName(Context context, String name) {
@@ -31,7 +31,14 @@ public class ConnectInfoHandler {
     }
 
     public static String getName(Context context) {
-        return PreferenceUtils.getString(context, INFO_NAME, null);
+        return PreferenceUtils.getString(context, INFO_NAME, "none");
+    }
+
+    // clear connection info
+    public static void clearConnectionInfo(Context context){
+        putSign(context,false);
+        putIp(context, "");
+        putName(context, "");
     }
 
 }

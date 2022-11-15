@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="info_window_margin">20dp</dimen>
+    <dimen name="info_dot_size">5dp</dimen>
+    <dimen name="btn_margin_border">12dp</dimen>
+    <dimen name="btn_margin_each">6dp</dimen>
+    <dimen name="btn_up_down_size">90dp</dimen>
+    <dimen name="btn_mode_width">140dp</dimen>
+</resources>

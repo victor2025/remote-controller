@@ -1,45 +1,57 @@
-package com.victor2022.remote_controller.utils;
+package com.victor2022.remote_controller.handlers;
 
 import android.util.Log;
+
+import com.victor2022.remote_controller.utils.HttpUtils;
 
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class DeviceScanner {
 
+    private static final String DEVICE_PREFIX = "remote-controller";
     private static final String ID_DOMAIN = "/identity/";
-    private ThreadPoolExecutor pool;
+    private static ThreadPoolExecutor pool;
     private boolean completed = false;
 
     public DeviceScanner() {
-        if (pool == null || pool.isShutdown()) {
-            this.pool = new ThreadPoolExecutor(2, 4,
+        checkPool();
+    }
+
+    private void checkPool(){
+        if (pool == null || pool.isTerminated()) {
+            this.pool = new ThreadPoolExecutor(4, 6,
                     2, TimeUnit.SECONDS,
-                    new ArrayBlockingQueue<Runnable>(255),
-                    new ThreadPoolExecutor.DiscardOldestPolicy());
+                    new ArrayBlockingQueue<Runnable>(100),
+                    new ThreadPoolExecutor.CallerRunsPolicy());
         }
     }
 
-    public void check(String address, SynchronousQueue<String[]> queue) {
+    // check specified address
+    public void check(String address, Queue<String[]> queue, CountDownLatch latch) {
+        // check thread pool
+        checkPool();
+        // start task
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                String url = address+ID_DOMAIN;
+                String url = HttpUtils.HTTP_PREFIX+address+ID_DOMAIN;
                 Log.i("DeviceScanner","requesting ip: "+url);
                 // get resp
-                String resp = HttpUtils.httpGet(url, null);
+                String resp = HttpUtils.httpGet(url, 200, 1000);
                 Log.i("DeviceScanner","ip: "+url+" get response: "+resp);
-                if(resp!=null&&resp.startsWith("remote-controller")){
+                if(resp!=null&&resp.startsWith(DEVICE_PREFIX)){
                     int idx = resp.indexOf(':');
                     String name = resp.substring(idx+1);
                     String[] arr = {address, name};
-                    try {
-                        queue.put(arr);
-                    } catch (InterruptedException e) {}
+                    queue.offer(arr);
+                    // inform caller
+                    latch.countDown();
                 }
             }
         };

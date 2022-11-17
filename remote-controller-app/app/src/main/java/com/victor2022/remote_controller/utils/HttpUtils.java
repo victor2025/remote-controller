@@ -1,13 +1,11 @@
 package com.victor2022.remote_controller.utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author wangfei
@@ -18,11 +16,11 @@ public class HttpUtils {
 
     public static final String HTTP_PREFIX = "http://";
 
-    public static String httpGet(String address, int connTimeout, int readTimeout){
+    public static String httpGet(String urlStr, int connTimeout, int readTimeout){
         URL url = null;
         HttpURLConnection connection = null;
         try {
-            url = new URL(address);
+            url = new URL(urlStr);
             // 1，得到HttpURLConnection 实例
             connection = (HttpURLConnection) url.openConnection();
             // 2，设置请求方法
@@ -33,9 +31,6 @@ public class HttpUtils {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             // 4,向服务器发送数据
-            //            connection.setRequestMethod("POST");
-            //            DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            //            out.writeBytes("username=hh&pwd=12345");
             // 5,得到服务器返回数据
             InputStream inputStream = connection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -48,7 +43,7 @@ public class HttpUtils {
             return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "";
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -77,9 +72,6 @@ public class HttpUtils {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             // 4,向服务器发送数据
-            //            connection.setRequestMethod("POST");
-            //            DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            //            out.writeBytes("username=hh&pwd=12345");
             // 5,得到服务器返回数据
             InputStream inputStream = connection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -92,7 +84,7 @@ public class HttpUtils {
             return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "";
         } finally {
             if (connection != null) {
                 connection.disconnect();

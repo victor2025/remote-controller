@@ -14,11 +14,11 @@ import java.util.Enumeration;
 
 public class NetworkUtils {
 
-    public static final String NO_WIFI = "no wifi";
+    public static final String NO_WIFI = "need wifi";
 
     // get local ip address
-    public static String getLocalIPAddress(Context context) {
-
+    public static String getLocalIPAddressWithWifi(Context context) {
+        // get network info
         NetworkInfo info = ((ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
@@ -26,6 +26,8 @@ public class NetworkUtils {
                 return getIpWithWifiNetwork(context);
             }
         }
+        // show toast
+        ToastUtils.showToast(context,NO_WIFI);
         return NO_WIFI;
     }
 

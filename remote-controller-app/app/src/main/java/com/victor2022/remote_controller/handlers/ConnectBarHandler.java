@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.victor2022.remote_controller.R;
-import com.victor2022.remote_controller.utils.ConnectInfoUtils;
 import com.victor2022.remote_controller.utils.NetworkUtils;
+import com.victor2022.remote_controller.utils.VibrateUtils;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -16,35 +16,41 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ConnectBarHandler {
 
-    private Activity activity;
-    private TextView view;
-    private static DeviceScanner scanner;
-    private static AtomicBoolean isRunning = new AtomicBoolean(false);
-    private static AtomicBoolean isConnected = new AtomicBoolean(false);
+    private final Activity activity;
+    private final TextView view;
+    private static DeviceScanHandler scanner;
+    private static final AtomicBoolean isRunning = new AtomicBoolean(false);
 
     public ConnectBarHandler(Activity activity, View view) {
         this.activity = activity;
         this.view = (TextView) view;
         if (scanner == null) {
-            scanner = new DeviceScanner();
+            synchronized (ConnectInfoHandler.class) {
+                if (scanner == null) {
+                    scanner = new DeviceScanHandler();
+                }
+            }
         }
     }
 
     // process connect bar
     public void handle() {
-        if (!isRunning.get() && !isConnected.get()) {
-            // try to connect
+        // vibrate
+        VibrateUtils.shortVibration(activity);
+        // handle
+        if (!isRunning.get() && !ConnectStatusHandler.isConnected()) {
+            // try to scan and connect with one thread
             synchronized (activity) {
-                if (!isRunning.get() && !isConnected.get()) {
+                if (!isRunning.get() && !ConnectStatusHandler.isConnected()) {
                     handle0();
                 }
             }
         } else {
+            // stop all the actions
             handle1();
         }
 
     }
-
 
     // handle with another thread
     private void handle0() {
@@ -81,6 +87,7 @@ public class ConnectBarHandler {
 
     // scan and connect
     private String[] scan() {
+        // wait for scan
         CountDownLatch scanWait = new CountDownLatch(1);
         Queue<String[]> queue = new ConcurrentLinkedQueue<>();
         // submit scan tasks
@@ -125,12 +132,14 @@ public class ConnectBarHandler {
 
     // submit scan task to check
     private void submitScanTasks(Queue<String[]> queue, CountDownLatch latch) {
-        String localIp = NetworkUtils.getLocalIPAddress(activity);
+        String localIp = NetworkUtils.getLocalIPAddressWithWifi(activity);
         // start check
         String[] ipArr = localIp.split("[.]");
+        // make sure the ipAddress is valid
         if (ipArr.length != 4) {
             // stop waiting
             latch.countDown();
+            // print toggle
             return;
         }
         // parse ip address
@@ -157,7 +166,7 @@ public class ConnectBarHandler {
         new Thread() {
             @Override
             public void run() {
-                for (int i = 0; i <= 255&&isRunning.get(); i++) {
+                for (int i = 0; i <= 255 && isRunning.get(); i++) {
                     String ip = header + String.valueOf(i);
                     // don't check self
                     if (!ip.equals(self)) scanner.check(ip, queue, latch);
@@ -170,75 +179,14 @@ public class ConnectBarHandler {
     // save info and handle bar
     private void connected(String[] ip) {
         if (ip != null) {
-            saveAndFlushInfo(true, ip);
-            isConnected.compareAndSet(false, true);
-            activity.runOnUiThread(() -> {
-                // color
-                view.setBackgroundColor(activity.getColor(R.color.status_connected));
-                // text
-                String devName = ip[1];
-                String text = activity.getString(R.string.connected_status);
-                text = String.format(text, devName);
-                view.setText(text);
-            });
+            ConnectStatusHandler.connected(activity,ip[1],ip[0]);
         }
     }
 
     // save info and handle bar
     private void disconnected() {
         // save to preferences and flush info window
-        saveAndFlushInfo(false, null);
-        // set status
-        isConnected.compareAndSet(true, false);
-        activity.runOnUiThread(() -> {
-            // color
-            view.setBackgroundColor(activity.getColor(R.color.status_disconnected));
-            // text
-            view.setText(activity.getString(R.string.default_status));
-        });
+        ConnectStatusHandler.disconnected(activity);
     }
 
-    // save and flush info
-    private void saveAndFlushInfo(boolean success, String[] ip) {
-        saveInfo(success, ip);
-        flushInfo(success);
-    }
-
-    // flush info window
-    private void flushInfo(boolean success) {
-        activity.runOnUiThread(() -> {
-            String name = "none";
-            String address = "none";
-            String status = "disconnected";
-            int statusColor = activity.getColor(R.color.status_disconnected);
-            // check status
-            if (success) {
-                name = ConnectInfoUtils.getName(activity);
-                address = ConnectInfoUtils.getIp(activity);
-                status = "connected";
-                statusColor = activity.getColor(R.color.status_connected);
-            }
-            // get view
-            TextView nameView = activity.findViewById(R.id.info_name);
-            TextView addressView = activity.findViewById(R.id.info_address);
-            TextView statusView = activity.findViewById(R.id.info_status);
-            // update view
-            nameView.setText(name);
-            addressView.setText(address);
-            statusView.setText(status);
-            statusView.setTextColor(statusColor);
-        });
-
-    }
-
-    // save info to preferences
-    private void saveInfo(boolean success, String[] ip) {
-        if (success && ip != null) {
-            ConnectInfoUtils.putSign(activity, true);
-            ConnectInfoUtils.putIp(activity, ip[0]);
-            ConnectInfoUtils.putName(activity, ip[1]);
-        } else {
-            ConnectInfoUtils.putSign(activity, false);
-        }
-    }
 }

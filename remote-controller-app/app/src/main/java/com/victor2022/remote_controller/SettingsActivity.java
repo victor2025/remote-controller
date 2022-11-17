@@ -1,6 +1,5 @@
 package com.victor2022.remote_controller;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,12 +7,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.victor2022.remote_controller.handlers.ConnectBarHandler;
-import com.victor2022.remote_controller.handlers.ControlButtonHandler;
-import com.victor2022.remote_controller.utils.ConnectInfoUtils;
+import com.victor2022.remote_controller.handlers.ControlPanelHandler;
+import com.victor2022.remote_controller.handlers.HeartBeatHandler;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private View connectBar = null;
+    private HeartBeatHandler heartBeatHandler = null;
+    private ControlPanelHandler controlPanelHandler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,28 +24,46 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         // clear last connect
-        ConnectInfoUtils.clearConnectionInfo(this);
-        // get connect bar
-        connectBar = findViewById(R.id.connect_bar);
+//        ConnectInfoUtils.clearConnectionInfo(this);
+        // add click listener
         setClickListener();
+        // create controlPanelHandler
+        this.controlPanelHandler = new ControlPanelHandler(this);
+        // start heart beat
+        this.heartBeatHandler = new HeartBeatHandler();
+        // check if the previous connection is still valid
+        this.heartBeatHandler.checkPreviousConnection(this);
+        // start heart beat with period
+        this.heartBeatHandler.startHeartBeat(this);
     }
 
     private void setClickListener() {
         // set connect bar listener
-        View.OnClickListener connectBarListener = (view) -> {
-            new ConnectBarHandler(this, view).handle();
-        };
-        connectBar.setOnClickListener(connectBarListener);
+        setConnectBarListener();
         // set control listener
         setControlClickListener();
     }
 
+    private void setConnectBarListener(){
+        // connection bar
+        View connectBar = findViewById(R.id.connect_bar);
+        View.OnClickListener connectBarListener = (view) -> {
+            new ConnectBarHandler(this, view).handle();
+        };
+        connectBar.setOnClickListener(connectBarListener);
+    }
+
     private void setControlClickListener() {
         // power button
-        View.OnClickListener powerBtnListener = (view) -> {
-            ControlButtonHandler.handlePower(this);
-        };
-        findViewById(R.id.btn_power).setOnClickListener(powerBtnListener);
+        findViewById(R.id.btn_power)
+                .setOnClickListener((view)->controlPanelHandler.handlePower());
+        // power button
+        findViewById(R.id.btn_mode)
+                .setOnClickListener((view)->controlPanelHandler.handleMode());// power button
+        findViewById(R.id.btn_up)
+                .setOnClickListener((view)->controlPanelHandler.handleUp());// power button
+        findViewById(R.id.btn_down)
+                .setOnClickListener((view)->controlPanelHandler.handleDown());
     }
 
 }

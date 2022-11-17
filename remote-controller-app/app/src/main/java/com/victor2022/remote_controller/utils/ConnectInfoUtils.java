@@ -1,7 +1,10 @@
 package com.victor2022.remote_controller.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.widget.TextView;
 
+import com.victor2022.remote_controller.R;
 import com.victor2022.remote_controller.utils.PreferenceUtils;
 
 public class ConnectInfoUtils {

@@ -4,22 +4,20 @@ import android.util.Log;
 
 import com.victor2022.remote_controller.utils.HttpUtils;
 
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class DeviceScanner {
+public class DeviceScanHandler {
 
     private static final String DEVICE_PREFIX = "remote-controller";
     private static final String ID_DOMAIN = "/identity/";
     private static ThreadPoolExecutor pool;
     private boolean completed = false;
 
-    public DeviceScanner() {
+    public DeviceScanHandler() {
         checkPool();
     }
 

@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Remote Controller Config Page</title>
+    <style> 
+    body {
+            background-color: #cccccc;
+            font-family: Arial, Helvetica, Sans-Serif;
+            Color: #000088;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- update info -->
+    <h1>Update wifi config</h1>
+    <form method="post" action="/saveinfo/" enctype="application/x-www-form-urlencoded">
+        <dev>SSID: </dev><input type="text" name="ssid"></input><br><br>
+        <dev>Password: </dev><input type="password" name="passwd"></input><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <!-- switch -->
+    <h1>Switch led</h1>
+    <form method="get" action="/switch/" target="switchPage">
+        <input type="submit" value="Submit">
+    </form>
+    <iframe id="switchPage" name="switchPage" hidden="true"></iframe>
+    <!-- power -->
+    <h1>Power</h1>
+    <form method="get" action="/power/" target="switchPage">
+        <input type="submit" value="Submit">
+    </form>
+    <iframe id="powerPage" name="powerPage" hidden="true"></iframe>
+    <!-- mode -->
+    <h1>Mode</h1>
+    <form method="get" action="/mode/" target="switchPage">
+        <input type="submit" value="Submit">
+    </form>
+    <iframe id="modePage" name="modePage" hidden="true"></iframe>
+    <!-- brighter -->
+    <h1>Brighter</h1>
+    <form method="get" action="/up/" target="switchPage">
+        <input type="submit" value="Submit">
+    </form>
+    <iframe id="upPage" name="upPage" hidden="true"></iframe>
+    <!-- darker -->
+    <h1>Darker</h1>
+    <form method="get" action="/down/" target="switchPage">
+        <input type="submit" value="Submit">
+    </form>
+    <iframe id="downPage" name="downPage" hidden="true"></iframe>
+</body>
+
+</html>

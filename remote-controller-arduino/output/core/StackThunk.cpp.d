@@ -1,0 +1,23 @@
+/home/victor2022/projects/Arduino/remote-controller/output/core/StackThunk.cpp.o: \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/StackThunk.cpp \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/pgmspace.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/ets_sys.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/c_types.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/eagle_soc.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/osapi.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/user_config.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/debug.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/StackThunk.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/umm_malloc/umm_malloc.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/umm_malloc/umm_malloc_cfg.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/pgmspace.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/mmu_iram.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/c_types.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/esp8266_undocumented.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/eagle_soc.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/spi_flash.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include/spi_flash_geometry.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/umm_malloc/../debug.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/umm_malloc/../esp8266_undocumented.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/core_esp8266_features.h \
+ /home/victor2022/.arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/umm_malloc/umm_heap_select.h

@@ -1,0 +1,12 @@
+{
+  "additionalFiles": "..,..",
+  "builtInLibrariesFolders": "/home/victor2022/programs/arduino-1.8.16/libraries",
+  "builtInToolsFolders": "/home/victor2022/programs/arduino-1.8.16/tools-builder,/home/victor2022/programs/arduino-1.8.16/hardware/tools/avr,/home/victor2022/.arduino15/packages",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "build.path=/home/victor2022/projects/Arduino/remote-controller/output,build.warn_data_percentage=75,runtime.tools.python3.path=/home/victor2022/.arduino15/packages/esp8266/tools/python3/3.7.2-post1,runtime.tools.python3-3.7.2-post1.path=/home/victor2022/.arduino15/packages/esp8266/tools/python3/3.7.2-post1,runtime.tools.mkspiffs.path=/home/victor2022/.arduino15/packages/esp8266/tools/mkspiffs/3.0.4-gcc10.3-1757bed,runtime.tools.mkspiffs-3.0.4-gcc10.3-1757bed.path=/home/victor2022/.arduino15/packages/esp8266/tools/mkspiffs/3.0.4-gcc10.3-1757bed,runtime.tools.mklittlefs.path=/home/victor2022/.arduino15/packages/esp8266/tools/mklittlefs/3.0.4-gcc10.3-1757bed,runtime.tools.mklittlefs-3.0.4-gcc10.3-1757bed.path=/home/victor2022/.arduino15/packages/esp8266/tools/mklittlefs/3.0.4-gcc10.3-1757bed,runtime.tools.xtensa-lx106-elf-gcc.path=/home/victor2022/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.0.4-gcc10.3-1757bed,runtime.tools.xtensa-lx106-elf-gcc-3.0.4-gcc10.3-1757bed.path=/home/victor2022/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.0.4-gcc10.3-1757bed",
+  "fqbn": "esp8266:esp8266:d1:xtal=80,vt=flash,exception=disabled,stacksmash=disabled,ssl=all,mmu=3232,non32xfer=fast,eesz=4M2M,ip=lm2f,dbg=Disabled,lvl=None____,wipe=none,baud=921600",
+  "hardwareFolders": "/home/victor2022/programs/arduino-1.8.16/hardware,/home/victor2022/.arduino15/packages",
+  "otherLibrariesFolders": "/home/victor2022/projects/Arduino/libraries",
+  "runtime.ide.version": "10816",
+  "sketchLocation": "/home/victor2022/projects/Arduino/remote-controller/remote-controller.ino"
+}

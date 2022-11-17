@@ -6,8 +6,10 @@ import android.widget.Toast;
 
 public class ToastUtils {
 
-    public static void showToast(Context context, String msg){
-        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-        toast.show();
+    public static void showToast(Activity activity, String msg){
+        activity.runOnUiThread(()->{
+            Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_SHORT);
+            toast.show();
+        });
     }
 }

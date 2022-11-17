@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.TextView;
 
 import com.victor2022.remote_controller.R;
+import com.victor2022.remote_controller.utils.ToastUtils;
 import com.victor2022.remote_controller.utils.VibrateUtils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,6 +28,8 @@ public class ConnectStatusHandler {
             String text = activity.getString(R.string.connected_status);
             text = String.format(text, deviceName);
             bar.setText(text);
+            // toast
+            ToastUtils.showToast(activity, "device connected");
         });
         // vibrate
         VibrateUtils.longVibration(activity);

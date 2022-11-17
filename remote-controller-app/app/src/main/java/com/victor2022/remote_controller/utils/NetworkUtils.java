@@ -1,5 +1,6 @@
 package com.victor2022.remote_controller.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,23 +18,23 @@ public class NetworkUtils {
     public static final String NO_WIFI = "need wifi";
 
     // get local ip address
-    public static String getLocalIPAddressWithWifi(Context context) {
+    public static String getLocalIPAddressWithWifi(Activity activity) {
         // get network info
-        NetworkInfo info = ((ConnectivityManager) context
+        NetworkInfo info = ((ConnectivityManager) activity
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {
-                return getIpWithWifiNetwork(context);
+                return getIpWithWifiNetwork(activity);
             }
         }
         // show toast
-        ToastUtils.showToast(context,NO_WIFI);
+        ToastUtils.showToast(activity,NO_WIFI);
         return NO_WIFI;
     }
 
-    private static String getIpWithWifiNetwork(Context context){
+    private static String getIpWithWifiNetwork(Activity activity){
         //当前使用无线网络
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址
         return ipAddress;

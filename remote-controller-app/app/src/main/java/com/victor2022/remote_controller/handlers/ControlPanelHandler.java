@@ -2,6 +2,7 @@ package com.victor2022.remote_controller.handlers;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.victor2022.remote_controller.utils.HttpUtils;
 import com.victor2022.remote_controller.utils.StringUtils;

@@ -23,9 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        // clear last connect
-//        ConnectInfoUtils.clearConnectionInfo(this);
-        // add click listener
+        // set click listener
         setClickListener();
         // create controlPanelHandler
         this.controlPanelHandler = new ControlPanelHandler(this);
@@ -54,14 +52,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setControlClickListener() {
-        // power button
+        // control buttons
         findViewById(R.id.btn_power)
                 .setOnClickListener((view)->controlPanelHandler.handlePower());
-        // power button
         findViewById(R.id.btn_mode)
-                .setOnClickListener((view)->controlPanelHandler.handleMode());// power button
+                .setOnClickListener((view)->controlPanelHandler.handleMode());
         findViewById(R.id.btn_up)
-                .setOnClickListener((view)->controlPanelHandler.handleUp());// power button
+                .setOnClickListener((view)->controlPanelHandler.handleUp());
         findViewById(R.id.btn_down)
                 .setOnClickListener((view)->controlPanelHandler.handleDown());
     }

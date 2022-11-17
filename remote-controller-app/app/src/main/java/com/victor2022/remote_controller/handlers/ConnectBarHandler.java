@@ -87,11 +87,16 @@ public class ConnectBarHandler {
 
     // scan and connect
     private String[] scan() {
+        // get local ip
+        String localIp = NetworkUtils.getLocalIPAddressWithWifi(activity);
+        if(NetworkUtils.NO_WIFI.equals(localIp)){
+            return null;
+        }
         // wait for scan
         CountDownLatch scanWait = new CountDownLatch(1);
         Queue<String[]> queue = new ConcurrentLinkedQueue<>();
         // submit scan tasks
-        submitScanTasks(queue, scanWait);
+        submitScanTasks(queue, scanWait, localIp);
         // wait for scanning
         new Thread() {
             @Override
@@ -131,8 +136,7 @@ public class ConnectBarHandler {
     }
 
     // submit scan task to check
-    private void submitScanTasks(Queue<String[]> queue, CountDownLatch latch) {
-        String localIp = NetworkUtils.getLocalIPAddressWithWifi(activity);
+    private void submitScanTasks(Queue<String[]> queue, CountDownLatch latch, String localIp) {
         // start check
         String[] ipArr = localIp.split("[.]");
         // make sure the ipAddress is valid

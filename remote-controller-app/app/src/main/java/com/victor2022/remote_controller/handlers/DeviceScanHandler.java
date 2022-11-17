@@ -15,12 +15,12 @@ public class DeviceScanHandler {
     private static final String DEVICE_PREFIX = "remote-controller";
     private static final String ID_DOMAIN = "/identity/";
     private static ThreadPoolExecutor pool;
-    private boolean completed = false;
 
     public DeviceScanHandler() {
         checkPool();
     }
 
+    // make sure the thread pool is ready
     private void checkPool(){
         if (pool == null || pool.isTerminated()) {
             this.pool = new ThreadPoolExecutor(4, 6,

@@ -42,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
         setControlClickListener();
     }
 
-    private void setConnectBarListener(){
+    private void setConnectBarListener() {
         // connection bar
         View connectBar = findViewById(R.id.connect_bar);
         View.OnClickListener connectBarListener = (view) -> {
@@ -52,15 +52,18 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setControlClickListener() {
+        // control panel title
+        findViewById(R.id.btn_title)
+                .setOnClickListener((view) -> controlPanelHandler.handleSwitch());
         // control buttons
         findViewById(R.id.btn_power)
-                .setOnClickListener((view)->controlPanelHandler.handlePower());
+                .setOnClickListener((view) -> controlPanelHandler.handlePower());
         findViewById(R.id.btn_mode)
-                .setOnClickListener((view)->controlPanelHandler.handleMode());
+                .setOnClickListener((view) -> controlPanelHandler.handleMode());
         findViewById(R.id.btn_up)
-                .setOnClickListener((view)->controlPanelHandler.handleUp());
+                .setOnClickListener((view) -> controlPanelHandler.handleUp());
         findViewById(R.id.btn_down)
-                .setOnClickListener((view)->controlPanelHandler.handleDown());
+                .setOnClickListener((view) -> controlPanelHandler.handleDown());
     }
 
 }

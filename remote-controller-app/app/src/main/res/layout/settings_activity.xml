@@ -32,6 +32,7 @@
             android:orientation="vertical">
             <!-- info title-->
             <TextView
+                android:id="@+id/btn_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/title_background"

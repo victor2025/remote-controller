@@ -15,7 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ControlPanelHandler {
 
-    private static final String POWER_DOMAIN = "/switch/";
+    private static final String SWITCH_DOMAIN = "/switch/";
+    private static final String POWER_DOMAIN = "/power/";
     private static final String MODE_DOMAIN = "/mode/";
     private static final String UP_DOMAIN = "/up/";
     private static final String DOWN_DOMAIN = "/down/";
@@ -26,19 +27,23 @@ public class ControlPanelHandler {
         this.activity = activity;
     }
 
+    // execute when title is clicked
+    public void handleSwitch(){
+        sendAndProcess(SWITCH_DOMAIN);
+    }
     // execute when power button is clicked
     public void handlePower(){
         sendAndProcess(POWER_DOMAIN);
     }
-    // execute when power button is clicked
+    // execute when mode button is clicked
     public void handleMode(){
         sendAndProcess(MODE_DOMAIN);
     }
-    // execute when power button is clicked
+    // execute when up button is clicked
     public void handleUp(){
         sendAndProcess(UP_DOMAIN);
     }
-    // execute when power button is clicked
+    // execute when down button is clicked
     public void handleDown(){
         sendAndProcess(DOWN_DOMAIN);
     }
@@ -56,7 +61,8 @@ public class ControlPanelHandler {
             // get ip and make address
             String ip = ConnectInfoHandler.getDeviceIp();
             String address = HttpUtils.HTTP_PREFIX+ip+domain;
-            String resp = HttpUtils.httpGet(address, 500, 1000);
+            // send request and get response
+            String resp = HttpUtils.httpGet(address, 500, 800);
             // vibrate
             if(!StringUtils.isEmpty(resp)){
                 Log.i(this.getClass().getName(), "request to: "+address);

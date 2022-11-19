@@ -1,6 +1,7 @@
 package com.victor2022.remote_controller.handlers;
 
 import android.app.Activity;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
@@ -20,11 +21,16 @@ public class ControlPanelHandler {
     private static final String MODE_DOMAIN = "/mode/";
     private static final String UP_DOMAIN = "/up/";
     private static final String DOWN_DOMAIN = "/down/";
+    private static final int LONG_CLICK_INTERVAL = 100;
     private Activity activity;
     private ThreadPoolExecutor pool;
 
     public ControlPanelHandler(Activity activity) {
         this.activity = activity;
+        // create pool
+        this.pool = new ThreadPoolExecutor(2,4,5, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(10),
+                new ThreadPoolExecutor.DiscardPolicy());
     }
 
     // execute when title is clicked
@@ -43,19 +49,36 @@ public class ControlPanelHandler {
     public void handleUp(){
         sendAndProcess(UP_DOMAIN);
     }
+    public void handleUpLong(View view){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (view.isPressed()) {
+                    handleUp();
+                    SystemClock.sleep(LONG_CLICK_INTERVAL);
+                }
+            }
+        };
+        pool.submit(runnable);
+    }
     // execute when down button is clicked
     public void handleDown(){
         sendAndProcess(DOWN_DOMAIN);
     }
-
+    public void handleDownLong(View view){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (view.isPressed()) {
+                    handleDown();
+                    SystemClock.sleep(LONG_CLICK_INTERVAL);
+                }
+            }
+        };
+        pool.submit(runnable);
+    }
     // send request and process response
     private void sendAndProcess(String domain){
-        if (pool==null){
-            // create pool
-            this.pool = new ThreadPoolExecutor(2,4,5, TimeUnit.SECONDS,
-                    new ArrayBlockingQueue<>(20),
-                    new ThreadPoolExecutor.DiscardPolicy());
-        }
         this.pool.submit(()->{
             if(!ConnectStatusHandler.isConnected())return;
             // get ip and make address

@@ -64,6 +64,21 @@ public class SettingsActivity extends AppCompatActivity {
                 .setOnClickListener((view) -> controlPanelHandler.handleUp());
         findViewById(R.id.btn_down)
                 .setOnClickListener((view) -> controlPanelHandler.handleDown());
+        // long click
+        setControlLongClickListener();
+    }
+
+    private void setControlLongClickListener(){
+        findViewById(R.id.btn_up)
+                .setOnLongClickListener((view) -> {
+                    controlPanelHandler.handleUpLong(view);
+                    return true;
+                });
+        findViewById(R.id.btn_down)
+                .setOnLongClickListener((view)->{
+                    controlPanelHandler.handleDownLong(view);
+                    return true;
+                });
     }
 
 }

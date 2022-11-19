@@ -1,6 +1,7 @@
 package com.victor2022.remote_controller.handlers;
 
 import android.app.Activity;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.TextView;
 
@@ -110,11 +111,7 @@ public class ConnectBarHandler {
                         view.setText(text);
                     });
                     dur--;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    SystemClock.sleep(1000);
                 }
                 // count down
                 scanWait.countDown();

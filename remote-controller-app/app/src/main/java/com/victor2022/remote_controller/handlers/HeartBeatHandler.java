@@ -13,6 +13,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HeartBeatHandler {
 
     private static final String HEART_BEAT_DOMAIN = "/identity/";
+    private static final int MAX_MISS_CNT = 3;
+    private int missCnt = 0;
 
     // check previous connection
     public void checkPreviousConnection(Activity activity) {
@@ -56,9 +58,18 @@ public class HeartBeatHandler {
         // if isConnected check connection
         String ip = ConnectInfoHandler.getDeviceIp();
         isConnected = beat(ip);
-        // if the connection is invalid
+        // if the connection is invalid, count up
         if (!isConnected) {
+            missCnt++;
+            Log.e(this.getClass().getName(), "miss connection for: "+missCnt);
+        }else{
+            missCnt = 0;
+        }
+        // change status
+        if (missCnt>=MAX_MISS_CNT){
+            Log.e(this.getClass().getName(), "disconnecting...");
             ConnectStatusHandler.disconnected(activity);
+            missCnt = 0;
         }
     }
 
@@ -66,7 +77,7 @@ public class HeartBeatHandler {
     private boolean beat(String ip) {
         Log.i(this.getClass().getName(), "ping: sending heart beat request");
         String url = HttpUtils.HTTP_PREFIX + ip + HEART_BEAT_DOMAIN;
-        String resp = HttpUtils.httpGet(url, 2000, 2000);
+        String resp = HttpUtils.httpGet(url, 1000, 2000);
         Log.i(this.getClass().getName(), "pong: " + resp);
         return resp != null && !"".equals(resp);
     }

@@ -24,10 +24,6 @@ void setup(){
     setupServer();
     // 设置串口
     setupPin();
-
-    // debug
-    // saveSsid("MERCURY_BF80");
-    // savePasswd("19980608");
 }
 
 void loop(){
